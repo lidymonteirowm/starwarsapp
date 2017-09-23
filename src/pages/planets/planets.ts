@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
+import { ApiProvider } from './../../providers/api/api';
 /**
  * Generated class for the PlanetsPage page.
  *
@@ -15,7 +19,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PlanetsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  planets: Observable<any>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public apiProvider: ApiProvider) {
+    this.planets = this.apiProvider.getPlanets();
   }
 
   ionViewDidLoad() {
